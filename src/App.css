@@ -22,6 +22,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .A {
@@ -46,4 +47,14 @@
 
 .F {
   background-color: fuchsia;
+}
+
+.hidden::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: salmon;
 }
