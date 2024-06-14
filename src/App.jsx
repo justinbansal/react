@@ -1,31 +1,23 @@
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import './App.css'
 
 import Card from './Card';
 
 function App() {
   const [choices, setChoices] = useState([]);
-  const [isViewing, setIsViewing] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
-  const [isMatch, setIsMatch] = useState(false);
+  const [matches, setMatches] = useState([]);
 
-  useEffect(() => {
-    if (choices.length > 0 && choices[0] && choices[1]) {
-      if (choices[0].content === choices[1].content) {
-        alert('We have a match!');
-      }
-
-      setIsViewing(true);
-
-      setTimeout(() => {
-        setIsViewing(false);
-        setChoices([]);
-      }, 1500)
-
-    } else {
-      setIsViewing(false);
+  if (choices.length > 0 && choices[0] && choices[1]) {
+    if (choices[0].content === choices[1].content) {
+      let updatedMatches = matches.concat(choices);
+      setMatches(updatedMatches);
+      setChoices([]);
     }
-  }, [choices])
+
+    setTimeout(() => {
+      setChoices([]);
+    }, 1500)
+  }
 
   function handleClick(e) {
     if (choices.length > 1) return;
@@ -33,13 +25,11 @@ function App() {
     setChoices([...choices, {id: e.target.id, content: e.target.dataset.value}]);
   }
 
-  let viewingClass = isViewing ? 'board--viewing' : '';
-
   return (
     <>
       <div>
         <h1>Memory Game</h1>
-        <div className={`board ${viewingClass}`}>
+        <div className="board">
           <Card content="A" handleClick={(e) => handleClick(e)} choices={choices} id="1" />
           <Card content="B" handleClick={(e) => handleClick(e)} choices={choices} id="2" />
           <Card content="C" handleClick={(e) => handleClick(e)} choices={choices} id="3" />
