@@ -5,6 +5,7 @@ import Card from './Card';
 
 function App() {
   const [choices, setChoices] = useState([]);
+  const [isViewing, setIsViewing] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [isMatch, setIsMatch] = useState(false);
 
@@ -13,6 +14,16 @@ function App() {
       if (choices[0].content === choices[1].content) {
         alert('We have a match!');
       }
+
+      setIsViewing(true);
+
+      setTimeout(() => {
+        setIsViewing(false);
+        setChoices([]);
+      }, 1500)
+
+    } else {
+      setIsViewing(false);
     }
   }, [choices])
 
@@ -22,11 +33,13 @@ function App() {
     setChoices([...choices, {id: e.target.id, content: e.target.dataset.value}]);
   }
 
+  let viewingClass = isViewing ? 'board--viewing' : '';
+
   return (
     <>
       <div>
         <h1>Memory Game</h1>
-        <div className="board">
+        <div className={`board ${viewingClass}`}>
           <Card content="A" handleClick={(e) => handleClick(e)} choices={choices} id="1" />
           <Card content="B" handleClick={(e) => handleClick(e)} choices={choices} id="2" />
           <Card content="C" handleClick={(e) => handleClick(e)} choices={choices} id="3" />
