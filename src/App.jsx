@@ -159,7 +159,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>Memory Game</h1>
+        <h1>Memory Game 🧠</h1>
         <New handleNewGameClick={handleNewGameClick} />
         <div className="board">
           {cardsList}
