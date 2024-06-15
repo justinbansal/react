@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  position: relative;
 }
 
 .board {
@@ -77,4 +78,40 @@
 .new-game {
   margin-bottom: 20px;
   background-color: pink;
+}
+
+.popup {
+  border: 1px solid black;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  color: white;
+}
+
+.popup:before {
+  background-color: black;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0.8;
+}
+
+.popup .message {
+  font-size: 25px;
+  z-index: 1;
+}
+
+.popup .new-game {
+  margin-bottom: 0;
+  z-index: 1;
 }

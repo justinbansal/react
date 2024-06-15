@@ -4,6 +4,7 @@ import './App.css'
 import New from './New';
 import Card from './Card';
 import Turns from './Turns';
+import Popup from './Popup';
 
 const defaultItems = [
   {
@@ -74,6 +75,8 @@ function App() {
 
   const [turnsCount, setTurnsCount] = useState(0);
 
+  const [showPopup, setShowPopup] = useState(false);
+
   const isMatch = function checkCardsForMatch() {
     const selectedCards = cards.filter(card => card.selected);
     if (selectedCards[0].content === selectedCards[1].content) {
@@ -93,7 +96,6 @@ function App() {
   }
 
   function updateTurnsCount() {
-    if (allMatched()) return;
     let count = turnsCount;
     count++;
     setTurnsCount(count);
@@ -138,9 +140,14 @@ function App() {
         return;
       }
     }
+    if (allMatched()) {
+      setShowPopup(true);
+      return;
+    }
   }
 
   function handleNewGameClick() {
+    setShowPopup(false);
     setTurnsCount(0);
     let updatedCards = cards.map(card => {
       card.selected = false;
@@ -163,6 +170,7 @@ function App() {
           {cardsList}
         </div>
         <Turns count={turnsCount} />
+        <Popup showPopup={showPopup} handleNewGameClick={handleNewGameClick} />
       </div>
     </>
   )
