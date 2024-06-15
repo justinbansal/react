@@ -5,70 +5,72 @@ import New from './New';
 import Card from './Card';
 import Turns from './Turns';
 
+const defaultItems = [
+  {
+    content: 'A',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'B',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'C',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'B',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'D',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'E',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'C',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'F',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'F',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'E',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'A',
+    selected: false,
+    matched: false,
+  },
+  {
+    content: 'D',
+    selected: false,
+    matched: false,
+  }
+]
+
 function App() {
 
-  const [cards, setCards] = useState([
-    {
-      content: 'A',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'B',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'C',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'B',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'D',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'E',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'C',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'F',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'F',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'E',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'A',
-      selected: false,
-      matched: false,
-    },
-    {
-      content: 'D',
-      selected: false,
-      matched: false,
-    }
-  ])
+  const [cards, setCards] = useState(defaultItems)
 
   const [turnsCount, setTurnsCount] = useState(0);
 
@@ -148,24 +150,17 @@ function App() {
     setCards(updatedCards);
   }
 
+  let cardsList = cards.map((card, index) => {
+    return <Card key={index} content={card.content} handleClick={() => handleClick(index)} isSelected={card.selected} isMatched={card.matched} />
+  })
+
   return (
     <>
       <div>
         <h1>Memory Game</h1>
         <New handleNewGameClick={handleNewGameClick} />
         <div className="board">
-          <Card content={cards[0].content} handleClick={() => handleClick(0)} isSelected={cards[0].selected} isMatched={cards[0].matched} />
-          <Card content={cards[1].content} handleClick={() => handleClick(1)} isSelected={cards[1].selected} isMatched={cards[1].matched} />
-          <Card content={cards[2].content} handleClick={() => handleClick(2)} isSelected={cards[2].selected} isMatched={cards[2].matched} />
-          <Card content={cards[3].content} handleClick={() => handleClick(3)} isSelected={cards[3].selected} isMatched={cards[3].matched} />
-          <Card content={cards[4].content} handleClick={() => handleClick(4)} isSelected={cards[4].selected} isMatched={cards[4].matched} />
-          <Card content={cards[5].content} handleClick={() => handleClick(5)} isSelected={cards[5].selected} isMatched={cards[5].matched} />
-          <Card content={cards[6].content} handleClick={() => handleClick(6)} isSelected={cards[6].selected} isMatched={cards[6].matched} />
-          <Card content={cards[7].content} handleClick={() => handleClick(7)} isSelected={cards[7].selected} isMatched={cards[7].matched} />
-          <Card content={cards[8].content} handleClick={() => handleClick(8)} isSelected={cards[8].selected} isMatched={cards[8].matched} />
-          <Card content={cards[9].content} handleClick={() => handleClick(9)} isSelected={cards[9].selected} isMatched={cards[9].matched} />
-          <Card content={cards[10].content} handleClick={() => handleClick(10)} isSelected={cards[10].selected} isMatched={cards[10].matched} />
-          <Card content={cards[11].content} handleClick={() => handleClick(11)} isSelected={cards[11].selected} isMatched={cards[11].matched} />
+          {cardsList}
         </div>
         <Turns count={turnsCount} />
       </div>
