@@ -108,6 +108,19 @@ function App() {
     }
   }
 
+  function resetSelectedState(delay) {
+    setTimeout(() => {
+      let updatedCards = cards.map(card => {
+        if (card.selected === true) {
+          card.selected = false;
+          return card;
+        }
+        return card;
+      });
+      setCards(updatedCards);
+    }, delay);
+  }
+
   function handleClick(i) {
     if (twoCardsSelected()) return;
     const updatedCards = cards.slice();
@@ -116,27 +129,9 @@ function App() {
     if (twoCardsSelected()) {
       updateTurnsCount();
       if (isMatch()) {
-        setTimeout(() => {
-          let updatedCards = cards.map(card => {
-            if (card.selected === true) {
-              card.selected = false;
-              return card;
-            }
-            return card;
-          });
-          setCards(updatedCards);
-        }, 1000);
+        resetSelectedState(1000);
       } else {
-        setTimeout(() => {
-          let updatedCards = cards.map(card => {
-            if (card.selected === true) {
-              card.selected = false;
-              return card;
-            }
-            return card;
-          });
-          setCards(updatedCards);
-        }, 1500);
+        resetSelectedState(1500);
         return;
       }
     }
