@@ -65,3 +65,11 @@
   right: 0;
   background-color: salmon;
 }
+
+.turns-wrapper {
+  margin: 20px auto;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  width: fit-content;
+}

@@ -2,6 +2,7 @@ import { useState} from 'react'
 import './App.css'
 
 import Card from './Card';
+import Turns from './Turns';
 
 function App() {
 
@@ -56,6 +57,8 @@ function App() {
     }
   ])
 
+  const [turnsCount, setTurnsCount] = useState(0);
+
   const isMatch = function checkCardsForMatch() {
     const selectedCards = cards.filter(card => card.selected);
     if (selectedCards[0].content === selectedCards[1].content) {
@@ -63,6 +66,12 @@ function App() {
       selectedCards[1].matched = true;
       return true;
     }
+  }
+
+  function updateTurnsCount() {
+    let count = turnsCount;
+    count++;
+    setTurnsCount(count);
   }
 
   const twoCardsSelected = function countSelected() {
@@ -78,6 +87,7 @@ function App() {
     updatedCards[i].selected = !cards[i].selected;
     setCards(updatedCards);
     if (twoCardsSelected()) {
+      updateTurnsCount();
       if (isMatch()) {
         let updatedCards = cards.map(card => {
           if (card.selected === true) {
@@ -121,6 +131,7 @@ function App() {
           <Card content={cards[10].content} handleClick={() => handleClick(10)} isSelected={cards[10].selected} isMatched={cards[10].matched} />
           <Card content={cards[11].content} handleClick={() => handleClick(11)} isSelected={cards[11].selected} isMatched={cards[11].matched} />
         </div>
+        <Turns count={turnsCount} />
       </div>
     </>
   )
