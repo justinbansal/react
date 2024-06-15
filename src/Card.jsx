@@ -1,5 +1,7 @@
 function Card(props) {
-  let visibility = props.isSelected ? 'visible' : 'hidden';
+  let isSelected = props.isSelected ? 'visible' : 'hidden';
+
+  let visibility = props.isMatched ? 'visible' : isSelected;
 
   return (
     <button
