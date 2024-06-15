@@ -10,50 +10,62 @@ function App() {
     {
       content: 'A',
       selected: false,
+      matched: false,
     },
     {
       content: 'B',
       selected: false,
+      matched: false,
     },
     {
       content: 'C',
       selected: false,
+      matched: false,
     },
     {
       content: 'B',
       selected: false,
+      matched: false,
     },
     {
       content: 'D',
       selected: false,
+      matched: false,
     },
     {
       content: 'E',
       selected: false,
+      matched: false,
     },
     {
       content: 'C',
       selected: false,
+      matched: false,
     },
     {
       content: 'F',
       selected: false,
+      matched: false,
     },
     {
       content: 'F',
       selected: false,
+      matched: false,
     },
     {
       content: 'E',
       selected: false,
+      matched: false,
     },
     {
       content: 'A',
       selected: false,
+      matched: false,
     },
     {
       content: 'D',
       selected: false,
+      matched: false,
     }
   ])
 
@@ -68,7 +80,17 @@ function App() {
     }
   }
 
+  const allMatched = function checkMatches() {
+    const unMatched = cards.filter(card => card.matched === false);
+    if (unMatched.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   function updateTurnsCount() {
+    if (allMatched()) return;
     let count = turnsCount;
     count++;
     setTurnsCount(count);
