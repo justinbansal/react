@@ -1,6 +1,7 @@
 import { useState} from 'react'
 import './App.css'
 
+import New from './New';
 import Card from './Card';
 import Turns from './Turns';
 
@@ -137,10 +138,21 @@ function App() {
     }
   }
 
+  function handleNewGameClick() {
+    setTurnsCount(0);
+    let updatedCards = cards.map(card => {
+      card.selected = false;
+      card.matched = false;
+      return card;
+    });
+    setCards(updatedCards);
+  }
+
   return (
     <>
       <div>
         <h1>Memory Game</h1>
+        <New handleNewGameClick={handleNewGameClick} />
         <div className="board">
           <Card content={cards[0].content} handleClick={() => handleClick(0)} isSelected={cards[0].selected} isMatched={cards[0].matched} />
           <Card content={cards[1].content} handleClick={() => handleClick(1)} isSelected={cards[1].selected} isMatched={cards[1].matched} />

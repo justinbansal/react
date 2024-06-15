@@ -73,3 +73,8 @@
   padding: 20px;
   width: fit-content;
 }
+
+.new-game {
+  margin-bottom: 20px;
+  background-color: pink;
+}
