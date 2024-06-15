@@ -89,14 +89,16 @@ function App() {
     if (twoCardsSelected()) {
       updateTurnsCount();
       if (isMatch()) {
-        let updatedCards = cards.map(card => {
-          if (card.selected === true) {
-            card.selected = false;
+        setTimeout(() => {
+          let updatedCards = cards.map(card => {
+            if (card.selected === true) {
+              card.selected = false;
+              return card;
+            }
             return card;
-          }
-          return card;
-        });
-        setCards(updatedCards);
+          });
+          setCards(updatedCards);
+        }, 1000);
       } else {
         setTimeout(() => {
           let updatedCards = cards.map(card => {
