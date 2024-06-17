@@ -108,7 +108,7 @@ function App() {
     }
   }
 
-  function resetSelectedState(delay) {
+  function resetSelectedState(delay: number) {
     setTimeout(() => {
       let updatedCards = cards.map(card => {
         if (card.selected === true) {
@@ -121,7 +121,7 @@ function App() {
     }, delay);
   }
 
-  function handleClick(i) {
+  function handleClick(i: number) {
     if (twoCardsSelected()) return;
     const updatedCards = cards.slice();
     updatedCards[i].selected = !cards[i].selected;

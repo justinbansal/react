@@ -1,4 +1,11 @@
-function Card(props) {
+interface CardProps {
+  isSelected: boolean;
+  isMatched: boolean;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+  content: string;
+}
+
+function Card(props: CardProps) {
   let isSelected = props.isSelected ? 'visible' : 'hidden';
 
   let visibility = props.isMatched ? 'visible' : isSelected;
@@ -8,7 +15,6 @@ function Card(props) {
       className={`card ${props.content} ${visibility}`}
       onClick={props.handleClick}
       data-value={props.content}
-      id={props.id}
     >
       {props.content}
     </button>

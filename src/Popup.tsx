@@ -1,6 +1,11 @@
 import New from './New';
 
-function Popup(props) {
+interface PopupProps {
+  showPopup: boolean;
+  handleNewGameClick: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+function Popup(props: PopupProps) {
   const message = 'You did it! Play again?';
   if (!props.showPopup) return;
   return (
