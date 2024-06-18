@@ -81,6 +81,12 @@ function App() {
   const [scores, setScores] = useState(null);
 
   useEffect(() => {
+    if (allMatched()) {
+      saveScores();
+    }
+  }, [turnsCount])
+
+  useEffect(() => {
     getScores();
   }, [])
 
