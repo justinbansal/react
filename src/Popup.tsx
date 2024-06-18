@@ -1,5 +1,3 @@
-import NewGame from './NewGame';
-
 interface PopupProps {
   showPopup: boolean;
   children: React.ReactNode
