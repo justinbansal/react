@@ -1,10 +1,11 @@
-import { useState} from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 import NewGame from './NewGame';
 import Card from './Card';
 import Turns from './Turns';
 import Popup from './Popup';
+import Scoreboard from './Scoreboard';
 
 const defaultItems = [
   {
@@ -76,6 +77,27 @@ function App() {
   const [turnsCount, setTurnsCount] = useState(0);
 
   const [showPopup, setShowPopup] = useState(false);
+
+  const [scores, setScores] = useState(null);
+
+  useEffect(() => {
+    getScores();
+  }, [])
+
+  function getScores() {
+    let scores = JSON.parse(localStorage.getItem('scores'));
+    if (!scores) {
+      scores = [];
+    }
+    setScores(scores);
+  }
+
+  function saveScores() {
+    if (!scores) return;
+    let updatedScores = [...scores, turnsCount];
+    setScores(updatedScores);
+    localStorage.setItem('scores', JSON.stringify(updatedScores));
+  }
 
   const isMatch = function checkCardsForMatch() {
     const selectedCards = cards.filter(card => card.selected);
@@ -165,6 +187,7 @@ function App() {
           {cardsList}
         </div>
         <Turns count={turnsCount} />
+        <Scoreboard scores={scores}/>
         <Popup showPopup={showPopup} handleNewGameClick={handleNewGameClick} />
       </div>
     </>
