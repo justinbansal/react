@@ -1,4 +1,5 @@
 function Scoreboard({scores}) {
+  if (!scores) return;
   if (scores.length === 0) return;
   const scoresList = scores.map((score: number, index: number) => <li key={index}>{score}</li>)
   return (

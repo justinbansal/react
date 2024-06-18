@@ -2,7 +2,7 @@ import NewGame from './NewGame';
 
 interface PopupProps {
   showPopup: boolean;
-  handleNewGameClick: React.MouseEventHandler<HTMLButtonElement>;
+  children: React.ReactNode
 }
 
 function Popup(props: PopupProps) {
@@ -12,7 +12,7 @@ function Popup(props: PopupProps) {
     <>
       <div className="popup">
         <span className="message">{message}</span>
-        <NewGame handleNewGameClick={props.handleNewGameClick} />
+        {props.children}
       </div>
     </>
   )

@@ -194,7 +194,9 @@ function App() {
         </div>
         <Turns count={turnsCount} />
         <Scoreboard scores={scores}/>
-        <Popup showPopup={showPopup} handleNewGameClick={handleNewGameClick} />
+        <Popup showPopup={showPopup}>
+          <NewGame handleNewGameClick={handleNewGameClick} />
+        </Popup>
       </div>
     </>
   )
