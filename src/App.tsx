@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 import NewGame from './NewGame';
+import Board from './Board';
 import Card from './Card';
 import Turns from './Turns';
 import Popup from './Popup';
@@ -189,9 +190,7 @@ function App() {
       <div>
         <h1>Memory Game 🧠</h1>
         <NewGame handleNewGameClick={handleNewGameClick} />
-        <div className="board">
-          {cardsList}
-        </div>
+        <Board cardsList={cardsList}/>
         <Turns count={turnsCount} />
         <Scoreboard scores={scores}/>
         <Popup showPopup={showPopup}>
