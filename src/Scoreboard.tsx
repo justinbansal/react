@@ -3,12 +3,12 @@ function Scoreboard({scores}) {
   const scoresList = scores.map((score: number, index: number) => <li key={index}>{score}</li>)
   return (
     <>
-      <aside className="scoreboard">
+      <div className="scoreboard">
         <h2>Your Past Scores</h2>
         <ul>
           {scoresList}
         </ul>
-      </aside>
+      </div>
     </>
   )
 }

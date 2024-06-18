@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
+import Header from './Header';
 import NewGame from './NewGame';
+import Turns from './Turns';
 import Board from './Board';
 import Card from './Card';
-import Turns from './Turns';
+import Sidebar from './Sidebar';
 import Popup from './Popup';
-import Scoreboard from './Scoreboard';
 
 const defaultItems = [
   {
@@ -187,16 +188,20 @@ function App() {
 
   return (
     <>
-      <div>
-        <h1>Memory Game 🧠</h1>
+      <Header title="Memory Game 🧠" />
+      <NewGame handleNewGameClick={handleNewGameClick} />
+      <main>
+        <Sidebar
+            scores={scores}
+          />
+        <Board cardsList={cardsList} />
+        <div className="wrapper">
+          <Turns count={turnsCount} />
+        </div>
+      </main>
+      <Popup showPopup={showPopup}>
         <NewGame handleNewGameClick={handleNewGameClick} />
-        <Board cardsList={cardsList}/>
-        <Turns count={turnsCount} />
-        <Scoreboard scores={scores}/>
-        <Popup showPopup={showPopup}>
-          <NewGame handleNewGameClick={handleNewGameClick} />
-        </Popup>
-      </div>
+      </Popup>
     </>
   )
 }

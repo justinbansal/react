@@ -1,9 +1,28 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
   position: relative;
+}
+
+main {
+  display: flex;
+
+  @media  screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+aside,
+.wrapper {
+  flex: 1;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .board {
@@ -12,6 +31,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  flex: 2;
 }
 
 .card {
@@ -68,7 +88,7 @@
 }
 
 .turns-wrapper {
-  margin: 20px auto;
+  align-self: flex-start;
   background-color: black;
   color: white;
   padding: 20px;
@@ -84,6 +104,7 @@
   border: 1px solid black;
   padding: 20px;
   display: flex;
+  flex-direction: column;
   gap: 20px;
   justify-content: center;
   align-items: center;
@@ -120,4 +141,8 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.scoreboard h2 {
+  margin-top: 0;
 }
