@@ -1,4 +1,4 @@
-import New from './New';
+import NewGame from './NewGame';
 
 interface PopupProps {
   showPopup: boolean;
@@ -12,7 +12,7 @@ function Popup(props: PopupProps) {
     <>
       <div className="popup">
         <span className="message">{message}</span>
-        <New handleNewGameClick={props.handleNewGameClick} />
+        <NewGame handleNewGameClick={props.handleNewGameClick} />
       </div>
     </>
   )

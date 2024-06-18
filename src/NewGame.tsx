@@ -2,7 +2,7 @@ interface NewProps {
   handleNewGameClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function New(props: NewProps) {
+function NewGame(props: NewProps) {
   return (
     <>
       <button className="new-game" onClick={props.handleNewGameClick}>New Game</button>
@@ -10,4 +10,4 @@ function New(props: NewProps) {
   )
 }
 
-export default New;
+export default NewGame;

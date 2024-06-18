@@ -1,7 +1,7 @@
 import { useState} from 'react'
 import './App.css'
 
-import New from './New';
+import NewGame from './NewGame';
 import Card from './Card';
 import Turns from './Turns';
 import Popup from './Popup';
@@ -160,7 +160,7 @@ function App() {
     <>
       <div>
         <h1>Memory Game 🧠</h1>
-        <New handleNewGameClick={handleNewGameClick} />
+        <NewGame handleNewGameClick={handleNewGameClick} />
         <div className="board">
           {cardsList}
         </div>
