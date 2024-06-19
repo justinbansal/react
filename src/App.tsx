@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import matchSound from './assets/correct.wav';
+import mismatchSound from './assets/incorrect.wav';
 
 import Header from './Header';
 import NewGame from './NewGame';
@@ -7,6 +9,7 @@ import Turns from './Turns';
 import Board from './Board';
 import Card from './Card';
 import Sidebar from './Sidebar';
+import Settings from './Settings';
 import Popup from './Popup';
 
 const defaultItems = [
@@ -82,6 +85,8 @@ function App() {
 
   const [scores, setScores] = useState(null);
 
+  const [soundEnabled, setSoundEnabled] = useState(false);
+
   useEffect(() => {
     if (allMatched()) {
       saveScores();
@@ -91,6 +96,26 @@ function App() {
   useEffect(() => {
     getScores();
   }, [])
+
+  function playMatchSound() {
+    if (!soundEnabled) return;
+
+    new Audio(matchSound).play();
+  }
+
+  function playMismatchSound() {
+    if (!soundEnabled) return;
+
+    new Audio(mismatchSound).play();
+  }
+
+  function handleEnableSound(e) {
+    if (e.target.checked) {
+      setSoundEnabled(true);
+    } else {
+      setSoundEnabled(false);
+    }
+  }
 
   function getScores() {
     let scores = JSON.parse(localStorage.getItem('scores'));
@@ -159,8 +184,10 @@ function App() {
     if (twoCardsSelected()) {
       updateTurnsCount();
       if (isMatch()) {
+        playMatchSound();
         resetSelectedState(1000);
       } else {
+        playMismatchSound();
         resetSelectedState(1500);
         return;
       }
@@ -197,6 +224,7 @@ function App() {
         <Board cardsList={cardsList} />
         <div className="wrapper">
           <Turns count={turnsCount} />
+          <Settings handleEnableSound={handleEnableSound}/>
         </div>
       </main>
       <Popup showPopup={showPopup}>

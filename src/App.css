@@ -22,7 +22,7 @@ aside,
 
 .wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
 
 .board {
@@ -88,7 +88,7 @@ aside,
 }
 
 .turns-wrapper {
-  align-self: flex-start;
+  align-self: center;
   background-color: black;
   color: white;
   padding: 20px;
