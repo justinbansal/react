@@ -85,7 +85,9 @@ function App() {
 
   const [scores, setScores] = useState(null);
 
-  const [soundEnabled, setSoundEnabled] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(
+    JSON.parse(localStorage.getItem('soundEnabled')) || false
+  );
 
   useEffect(() => {
     if (allMatched()) {
@@ -96,6 +98,14 @@ function App() {
   useEffect(() => {
     getScores();
   }, [])
+
+  useEffect(() => {
+    storeSoundSettings();
+  }, [soundEnabled])
+
+  function storeSoundSettings() {
+    localStorage.setItem('soundEnabled', JSON.stringify(soundEnabled));
+  }
 
   function playMatchSound() {
     if (!soundEnabled) return;
@@ -224,7 +234,7 @@ function App() {
         <Board cardsList={cardsList} />
         <div className="wrapper">
           <Turns count={turnsCount} />
-          <Settings handleEnableSound={handleEnableSound}/>
+          <Settings handleEnableSound={handleEnableSound} soundEnabled={soundEnabled}/>
         </div>
       </main>
       <Popup showPopup={showPopup}>
