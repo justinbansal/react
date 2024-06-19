@@ -1,6 +1,11 @@
 import Sound from './Sound';
 
-function Settings(props) {
+interface SettingsProps {
+  handleEnableSound: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  soundEnabled: boolean;
+}
+
+function Settings(props: SettingsProps) {
   return(
     <>
       <h3>Settings</h3>

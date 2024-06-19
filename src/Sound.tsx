@@ -1,4 +1,9 @@
-function Sound(props) {
+interface SoundProps {
+  handleEnableSound: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  soundEnabled: boolean;
+}
+
+function Sound(props: SoundProps) {
   return (
     <div className="sound-setting">
       <label htmlFor="sound">Enable sound</label>
