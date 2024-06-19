@@ -15,6 +15,7 @@ function Card(props: CardProps) {
       className={`card ${props.content} ${visibility}`}
       onClick={props.handleClick}
       data-value={props.content}
+      disabled={visibility === 'visible' ? true : false}
     >
       {props.content}
     </button>
