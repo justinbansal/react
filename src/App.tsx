@@ -83,10 +83,10 @@ function App() {
 
   const [showPopup, setShowPopup] = useState(false);
 
-  const [scores, setScores] = useState(null);
+  const [scores, setScores] = useState<Array<number | null>>([]);
 
-  const [soundEnabled, setSoundEnabled] = useState(
-    JSON.parse(localStorage.getItem('soundEnabled')) || false
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(
+    JSON.parse(localStorage.getItem('soundEnabled') as string) || false
   );
 
   useEffect(() => {
@@ -119,7 +119,7 @@ function App() {
     new Audio(mismatchSound).play();
   }
 
-  function handleEnableSound(e) {
+  function handleEnableSound(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.checked) {
       setSoundEnabled(true);
     } else {
@@ -128,7 +128,7 @@ function App() {
   }
 
   function getScores() {
-    let scores = JSON.parse(localStorage.getItem('scores'));
+    let scores = JSON.parse(localStorage.getItem('scores') as string);
     if (!scores) {
       scores = [];
     }
@@ -136,7 +136,7 @@ function App() {
   }
 
   function saveScores() {
-    if (!scores) return;
+    if (scores.length === 0) return;
     let updatedScores = [...scores, turnsCount];
     setScores(updatedScores);
     localStorage.setItem('scores', JSON.stringify(updatedScores));

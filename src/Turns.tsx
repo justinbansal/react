@@ -1,4 +1,8 @@
-function Turns({ count }) {
+interface TurnsProps {
+  count: number;
+}
+
+function Turns({ count }: TurnsProps) {
   return (
     <>
       <div className="turns-wrapper">

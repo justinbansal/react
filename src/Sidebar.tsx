@@ -1,6 +1,10 @@
 import Scoreboard from './Scoreboard';
 
-function Sidebar({scores}) {
+interface SidebarProps {
+  scores: Array<number | null>
+}
+
+function Sidebar({scores}: SidebarProps) {
   return (
     <aside>
       <Scoreboard scores={scores} />
