@@ -12,7 +12,13 @@ import Sidebar from './Sidebar';
 import Settings from './Settings';
 import Popup from './Popup';
 
-const defaultItems = [
+interface DefaultItems {
+  content: string,
+  selected: boolean,
+  matched: boolean
+}
+
+const defaultItems: Array<DefaultItems> = [
   {
     content: 'A',
     selected: false,
