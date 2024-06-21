@@ -150,7 +150,7 @@ function App() {
 
   const isMatch = function checkCardsForMatch() {
     const selectedCards = cards.filter(card => card.selected);
-    if (selectedCards[0].content === selectedCards[1].content) {
+    if (selectedCards[0] && selectedCards[1] && selectedCards[0].content === selectedCards[1].content) {
       selectedCards[0].matched = true;
       selectedCards[1].matched = true;
       return true;
@@ -195,7 +195,7 @@ function App() {
   function handleClick(i: number) {
     if (twoCardsSelected()) return;
     const updatedCards = cards.slice();
-    updatedCards[i].selected = !cards[i].selected;
+    updatedCards[i].selected = true;
     setCards(updatedCards);
     if (twoCardsSelected()) {
       updateTurnsCount();

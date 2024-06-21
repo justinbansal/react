@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "jsx": "react-jsx"
+      "strict": true,
+      "jsx": "react-jsx",
+      "noImplicitOverride": true,
+      "noImplicitAny": true
   }
 }
