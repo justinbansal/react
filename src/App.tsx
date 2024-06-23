@@ -16,7 +16,11 @@ interface DefaultItems {
   content: string,
   selected: boolean,
   matched: boolean
+  url?: string,
+  name?: string,
 }
+
+let animals;
 
 const defaultItems: Array<DefaultItems> = [
   {
@@ -95,6 +99,10 @@ function App() {
     JSON.parse(localStorage.getItem('soundEnabled') as string) || false
   );
 
+  const [contentType, setContentType] = useState<string>(
+    localStorage.getItem('contentType') || 'default'
+  );
+
   useEffect(() => {
     if (allMatched()) {
       saveScores();
@@ -108,6 +116,47 @@ function App() {
   useEffect(() => {
     storeSoundSettings();
   }, [soundEnabled])
+
+  useEffect(() => {
+    if (contentType === 'default') return;
+
+    if (contentType === 'animals') {
+      getAnimals();
+    }
+
+    storeContentTypeSettings();
+}, [contentType])
+
+  async function getAnimals () {
+    if (JSON.parse(localStorage.getItem('animals'))) {
+      setCards(JSON.parse(localStorage.getItem('animals')));
+      return;
+    }
+
+    let result = await fetchAnimals();
+    animals = result.map(item => ({
+      ...item, isSelected: false, matched: false, url: `http://localhost:3000${item.url}`
+    }));
+    setCards(animals);
+    localStorage.setItem('animals', JSON.stringify(animals));
+  }
+
+  function fetchAnimals() {
+    // Make a fetch request to backend and get animals
+   return fetch('http://localhost:3000/animals')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      return response.json();
+    })
+    .then(response => response);
+  }
+
+  function storeContentTypeSettings() {
+    localStorage.setItem('contentType', contentType);
+  }
 
   function storeSoundSettings() {
     localStorage.setItem('soundEnabled', JSON.stringify(soundEnabled));
@@ -225,8 +274,22 @@ function App() {
     setCards(updatedCards);
   }
 
+  function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    setContentType(e.target.value);
+  }
+
   let cardsList = cards.map((card, index) => {
-    return <Card key={index} content={card.content} handleClick={() => handleClick(index)} isSelected={card.selected} isMatched={card.matched} />
+    return (
+      <Card
+        key={index}
+        content={card.content}
+        handleClick={() => handleClick(index)}
+        isSelected={card.selected}
+        isMatched={card.matched}
+        url={card.url}
+        name={card.name}
+        />
+    )
   })
 
   return (
@@ -240,7 +303,12 @@ function App() {
         <Board cardsList={cardsList} />
         <div className="wrapper">
           <Turns count={turnsCount} />
-          <Settings handleEnableSound={handleEnableSound} soundEnabled={soundEnabled}/>
+          <Settings
+            handleEnableSound={handleEnableSound}
+            soundEnabled={soundEnabled}
+            handleSelectChange={handleSelectChange}
+            contentType={contentType}
+          />
         </div>
       </main>
       <Popup showPopup={showPopup}>
