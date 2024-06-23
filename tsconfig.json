@@ -3,6 +3,7 @@
       "strict": true,
       "jsx": "react-jsx",
       "noImplicitOverride": true,
-      "noImplicitAny": true
+      "noImplicitAny": true,
+      "lib": [ "es2015", "DOM" ]
   }
 }
