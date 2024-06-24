@@ -20,8 +20,6 @@ interface DefaultItems {
   name?: string,
 }
 
-let animals;
-
 const defaultItems: Array<DefaultItems> = [
   {
     content: 'A',
@@ -126,34 +124,55 @@ function App() {
       getAnimals();
     }
 
+    if (contentType === 'cars') {
+      getCars();
+    }
+
     storeContentTypeSettings();
 }, [contentType])
 
-  async function getAnimals () {
-    if (JSON.parse(localStorage.getItem('animals'))) {
-      setCards(JSON.parse(localStorage.getItem('animals')));
+  async function getCars() {
+    if (JSON.parse(localStorage.getItem('cars') as string)) {
+      setCards(JSON.parse(localStorage.getItem('cars') as string));
       return;
     }
 
-    let result = await fetchAnimals();
+    let cars = [];
+    let result = await fetchData('luxury');
     let resultDoubled = result.concat(result);
     shuffle(resultDoubled);
-    animals = resultDoubled.map(item => ({
+    cars = resultDoubled.map((item: DefaultItems) => ({
+      ...item, isSelected: false, matched: false, url: `http://localhost:3000${item.url}`, content: item.name
+    }));
+    setCards(cars);
+    localStorage.setItem('cars', JSON.stringify(cars));
+  }
+
+  async function getAnimals () {
+    if (JSON.parse(localStorage.getItem('animals') as string)) {
+      setCards(JSON.parse(localStorage.getItem('animals') as string));
+      return;
+    }
+    let animals = [];
+    let result = await fetchData('animals');
+    let resultDoubled = result.concat(result);
+    shuffle(resultDoubled);
+    animals = resultDoubled.map((item: DefaultItems) => ({
       ...item, isSelected: false, matched: false, url: `http://localhost:3000${item.url}`, content: item.name
     }));
     setCards(animals);
     localStorage.setItem('animals', JSON.stringify(animals));
   }
 
-  function shuffle(array) {
+  function shuffle(array: []) {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
   }
 
-  async function fetchAnimals() {
-   return fetch('http://localhost:3000/animals?limit=6')
+  async function fetchData(dataType: string) {
+   return fetch(`http://localhost:3000/${dataType}?limit=6`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
