@@ -118,7 +118,9 @@ function App() {
   }, [soundEnabled])
 
   useEffect(() => {
-    if (contentType === 'default') return;
+    if (contentType === 'default') {
+      setCards(defaultItems);
+    }
 
     if (contentType === 'animals') {
       getAnimals();
@@ -134,16 +136,24 @@ function App() {
     }
 
     let result = await fetchAnimals();
-    animals = result.map(item => ({
-      ...item, isSelected: false, matched: false, url: `http://localhost:3000${item.url}`
+    let resultDoubled = result.concat(result);
+    shuffle(resultDoubled);
+    animals = resultDoubled.map(item => ({
+      ...item, isSelected: false, matched: false, url: `http://localhost:3000${item.url}`, content: item.name
     }));
     setCards(animals);
     localStorage.setItem('animals', JSON.stringify(animals));
   }
 
-  function fetchAnimals() {
-    // Make a fetch request to backend and get animals
-   return fetch('http://localhost:3000/animals')
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  async function fetchAnimals() {
+   return fetch('http://localhost:3000/animals?limit=6')
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
