@@ -142,7 +142,7 @@ function App() {
     let resultDoubled = result.concat(result);
     shuffle(resultDoubled);
     cars = resultDoubled.map((item: DefaultItems) => ({
-      ...item, isSelected: false, matched: false, url: `http://localhost:3000${item.url}`, content: item.name
+      ...item, isSelected: false, matched: false, url: `https://match-api-ten.vercel.app${item.url}`, content: item.name
     }));
     setCards(cars);
     localStorage.setItem('cars', JSON.stringify(cars));
@@ -158,7 +158,7 @@ function App() {
     let resultDoubled = result.concat(result);
     shuffle(resultDoubled);
     animals = resultDoubled.map((item: DefaultItems) => ({
-      ...item, isSelected: false, matched: false, url: `http://localhost:3000${item.url}`, content: item.name
+      ...item, isSelected: false, matched: false, url: `https://match-api-ten.vercel.app${item.url}`, content: item.name
     }));
     setCards(animals);
     localStorage.setItem('animals', JSON.stringify(animals));
@@ -172,7 +172,7 @@ function App() {
   }
 
   async function fetchData(dataType: string) {
-   return fetch(`http://localhost:3000/${dataType}?limit=6`)
+   return fetch(`https://match-api-ten.vercel.app/${dataType}?limit=6`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
