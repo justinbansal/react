@@ -19,7 +19,7 @@ function Card(props: CardProps) {
       data-value={props.content}
       disabled={visibility === 'visible' ? true : false}
     >
-      {props.content ? props.content: <img src={props.url} alt={props.name} />}
+      {props.url ? <img src={props.url} alt={props.name} />: props.content}
     </button>
   )
 }
