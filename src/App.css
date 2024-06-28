@@ -181,3 +181,9 @@ aside,
 .select-wrapper select {
   margin-left: 10px;
 }
+
+.sound-setting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
