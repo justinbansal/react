@@ -4,6 +4,10 @@
   padding: 2rem;
   text-align: center;
   position: relative;
+
+  @media  screen and (max-width: 400px) {
+    padding: 1rem;
+  }
 }
 
 main {
@@ -47,6 +51,11 @@ aside,
   position: relative;
   padding: 0;
   border-radius: 0;
+
+  @media  screen and (max-width: 400px) {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 .card img {
